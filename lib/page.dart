@@ -83,33 +83,32 @@ class _PageScreenState extends State<PageScreen> {
     String csv = const ListToCsvConverter().convert(orderDetailsCsv);
     f.writeAsString(csv);
 
-    // Create and write the average quantity CSV file
     var averageQuantityFile = File(file + "/0_input_file_name.csv");
     List<List<dynamic>> averageQuantityCsv = [];
     averageQuantityCsv.add(['Product Name', 'Average Quantity']);
     for (var entry in productData.entries) {
-      var productID = entry.key;
       var totalQuantity = entry.value['total_quantity'];
       var averageQuantity = totalQuantity / orders.length;
       var productName = orders[0]['product_name'];
       averageQuantityCsv.add([productName, averageQuantity]);
     }
     print(averageQuantityCsv);
-    averageQuantityFile.writeAsString(const ListToCsvConverter().convert(averageQuantityCsv));
-
+    averageQuantityFile
+        .writeAsString(const ListToCsvConverter().convert(averageQuantityCsv));
 
     var popularBrandFile = File(file + "/1_input_file_name.csv");
     List<List<dynamic>> popularBrandCsv = [];
     popularBrandCsv.add(['Product Name', 'Most Popular Brand']);
     for (var entry in productData.entries) {
-      var productID = entry.key;
       var brandCounts = entry.value['brand_counts'];
-      var popularBrand = brandCounts.keys.reduce((String a, String b) => brandCounts[a]! > brandCounts[b]! ? a : b);
+      var popularBrand = brandCounts.keys.reduce(
+          (String a, String b) => brandCounts[a]! > brandCounts[b]! ? a : b);
       var productName = orders[0]['product_name'];
       popularBrandCsv.add([productName, popularBrand]);
     }
     print(popularBrandCsv);
-    popularBrandFile.writeAsString(const ListToCsvConverter().convert(popularBrandCsv));
+    popularBrandFile
+        .writeAsString(const ListToCsvConverter().convert(popularBrandCsv));
   }
 
   @override

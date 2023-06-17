@@ -3,6 +3,8 @@
 A new Flutter project.
 
 ## Getting Started
+## Dart SDK : 2.16.2
+## Flutter SDK : 2.10.5
 
 This project is a starting point for a Flutter application.
 
